@@ -42,6 +42,7 @@ const Skills = ({ isDark }) => {
       { name: 'Github', percent: 85 },
       { name: 'Postman ', percent: 80 },
       { name: 'VS Code', percent: 90 },
+      { name: 'Intellij', percent: 90 },
     ],
     DevOps: [
       { name: 'AWS', percent: 80 },
