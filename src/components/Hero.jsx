@@ -131,7 +131,7 @@ const Hero = ({ isDark, scrollToSection, onDownloadCV }) => {
             <div className="relative">
               <div className="absolute inset-0 bg-linear-to-r from-indigo-500 to-purple-600 rounded-full blur-2xl opacity-30 animate-pulse"></div>
               <img 
-                src="../assets/Narendra.jpeg" 
+                src="../public/Narendra.jpeg" 
                 alt="Profile" 
                 className="relative w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-indigo-500 shadow-2xl" 
               />
