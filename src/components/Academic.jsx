@@ -36,7 +36,7 @@ const academics = [
 	},
 	{
 		level: 'B.Tech (CSE)',
-		percentage: '7.0 CGPA',
+		percentage: '6.87 CGPA',
 		barWidth: '70%',
 		year: '2026',
 		desc: 'Major in Computer Science & Engineering',

@@ -16,15 +16,15 @@ const Contact = ({ isDark }) => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <User className="w-6 h-6 text-indigo-500" />
-                  <span>Your Name</span>
+                  <span>Narendra Deshmukh</span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <Phone className="w-6 h-6 text-indigo-500" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 8975394198</span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <Mail className="w-6 h-6 text-indigo-500" />
-                  <span>your.email@example.com</span>
+                  <span>dnarendra4510@gmail.com</span>
                 </div>
               </div>
             </div>

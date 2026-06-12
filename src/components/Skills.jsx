@@ -22,6 +22,7 @@ const Skills = ({ isDark }) => {
     frontend: [
       { name: 'JavaScript', percent: 85 },
       { name: 'React', percent: 80 },
+      { name: 'TypeScript', percent: 75 },
       { name: 'Tailwind CSS', percent: 75 },
       { name: 'Next.js', percent: 70 }
     ],
