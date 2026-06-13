@@ -1,7 +1,55 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Github, Linkedin, Twitter, Mail, Phone, User, ExternalLink } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = ({ isDark }) => {
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const sendEmail = async () => {
+    try {
+      setLoading(true);
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          time: new Date().toLocaleString(),
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      alert('Message sent successfully!');
+
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+
+    } catch (error) {
+      console.error("EMAILJS ERROR:", error);
+      alert(error.text || error.message);
+} finally {
+      setLoading(false);
+    }
+  };
   return (
     <section id="contact" className="py-20">
       <div className="max-w-full mx-auto px-8 sm:px-12 lg:px-16">
@@ -56,20 +104,28 @@ const Contact = ({ isDark }) => {
             <div className="space-y-4">
               <div>
                 <label className="block mb-2 text-sm font-medium">Name</label>
-                <input type="text" className={`w-full px-4 py-3 rounded-lg ${isDark ? 'bg-gray-900/50 border-gray-700' : 'bg-white border-gray-300'} border focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all`} placeholder="Your Name" />
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-lg ${isDark ? 'bg-gray-900/50 border-gray-700' : 'bg-white border-gray-300'} border focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all`}
+                  placeholder="Your Name"
+                />
               </div>
               
               <div>
                 <label className="block mb-2 text-sm font-medium">Email</label>
-                <input type="email" className={`w-full px-4 py-3 rounded-lg ${isDark ? 'bg-gray-900/50 border-gray-700' : 'bg-white border-gray-300'} border focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all`} placeholder="your.email@example.com" />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg ${isDark ? 'bg-gray-900/50 border-gray-700' : 'bg-white border-gray-300'} border focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all`} placeholder="your.email@example.com" />
               </div>
               
               <div>
                 <label className="block mb-2 text-sm font-medium">Message</label>
-                <textarea rows="5" className={`w-full px-4 py-3 rounded-lg ${isDark ? 'bg-gray-900/50 border-gray-700' : 'bg-white border-gray-300'} border focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all resize-none`} placeholder="Your message..."></textarea>
+                <textarea rows="5" name="message" value={formData.message} onChange={handleChange} className={`w-full px-4 py-3 rounded-lg ${isDark ? 'bg-gray-900/50 border-gray-700' : 'bg-white border-gray-300'} border focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none transition-all resize-none`} placeholder="Your message..."></textarea>
               </div>
               
-              <button className="w-full px-8 py-3 bg-linear-to-r from-indigo-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-indigo-500/50 transition-all flex items-center justify-center space-x-2">
+              <button onClick={sendEmail} disabled={loading}
+                className="w-full px-8 py-3 bg-linear-to-r from-indigo-500 to-purple-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-indigo-500/50 transition-all flex items-center justify-center space-x-2">
                 <span>Send Message</span>
                 <ExternalLink className="w-5 h-5" />
               </button>
